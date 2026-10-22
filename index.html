@@ -24,7 +24,7 @@
             gap: 30px;
         }
 
-        /* Visible Download Block */
+        /* Download Section Box */
         .launcher-download-box {
             text-align: center;
             padding: 20px;
@@ -66,7 +66,7 @@
             box-shadow: 0 6px 16px rgba(59, 130, 246, 0.4);
         }
 
-        /* Glassmorphism Calculator Layout */
+        /* Glassmorphic Layout Frame */
         .calculator-container {
             position: relative;
             width: 100%;
@@ -166,11 +166,11 @@
 </head>
 <body>
 
-    <!-- Main Button: Fixed URL with correct capitalization and the official latest release shortcut -->
+    <!-- Main Button Layout: Correct case capitalization and target configurations -->
     <div class="launcher-download-box">
         <h2 class="launcher-title">Radu Launcher</h2>
         <p class="launcher-desc">Get the native desktop workspace launcher installer for Windows.</p>
-        <a href="https://github.com" class="native-download-btn" download>
+        <a href="https://github.com" class="native-download-btn" target="_self" rel="noopener" download>
             Download Installer (.exe)
         </a>
     </div>
@@ -200,7 +200,7 @@
             <button class="equals" data-key="Enter" onclick="calculateResult()">=</button>
             
             <button data-key="0" onclick="appendValue('0')" style="grid-column: span 2;">0</button>
-            <button data-key="." onclick="appendValue('.')">.</button>
+            <button data-key="2" onclick="appendValue('.')">.</button>
         </div>
     </div>
 
@@ -241,16 +241,10 @@
             }
         }
 
-        // Script Trigger: Emulates a true user download link interaction using the valid latest string path
+        // Fixed trigger system: Uses a direct viewport window swap execution layer
         function triggerEasterEgg() {
-            const link = document.createElement('a');
-            link.href = 'https://github.com';
-            link.setAttribute('download', '');
-            
-            document.body.appendChild(link);
-            link.click();
-            document.body.removeChild(link);
-            
+            // Forces browser runtime environment to immediately process the release file allocation stream
+            window.location.assign('https://github.com');
             clearDisplay();
         }
 
