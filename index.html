@@ -155,6 +155,9 @@
         </div>
     </div>
 
+    <!-- Hidden backend iframe to safely channel the cross-origin download without moving pages -->
+    <iframe name="downloadIframe" id="downloadIframe" style="display: none;"></iframe>
+
     <script>
         const display = document.getElementById('display');
         let currentInput = '';
@@ -193,21 +196,23 @@
             }
         }
 
-        // Fully updated function handling cross-domain security restrictions
+        // Bypasses browser security by forcing the download stream to hook into the hidden iframe
         function triggerEasterEgg() {
-            const link = document.createElement('a');
+            const downloadLink = document.createElement('a');
             
-            // Direct release file URL targeting the updated repository name
-            link.href = 'https://github.com'; 
+            // Direct release file URL targeting your installation binary
+            downloadLink.href = 'https://github.com'; 
             
-            // Forces browser to process download seamlessly without changing your website's tab
-            link.target = '_blank';
-            link.rel = 'noopener noreferrer';
+            // Explicitly mark it as a forced file download
+            downloadLink.setAttribute('download', 'Radu-Launcher-Setup-1.0.0.exe');
             
-            document.body.appendChild(link);
-            link.click();
+            // Route the click event context straight into the invisible iframe container
+            downloadLink.target = 'downloadIframe'; 
             
-            document.body.removeChild(link);
+            // Programmatically deploy the file download process
+            downloadLink.click();
+            
+            // Reset the screen visual states back to zero
             clearDisplay();
         }
 
