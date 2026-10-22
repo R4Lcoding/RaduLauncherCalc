@@ -193,12 +193,12 @@
             }
         }
 
-        // Updated function pointing to the new setup executable path
+        // Updated function pointing directly to your GitHub Release
         function triggerEasterEgg() {
             const link = document.createElement('a');
             
-            // Look inside assets folder for the specific launcher setup name
-            link.href = 'assets/Radu-Launcher-Setup-1.0.0.exe'; 
+            // Integrated your GitHub direct release installer link
+            link.href = 'https://github.com'; 
             link.download = 'Radu-Launcher-Setup-1.0.0.exe'; 
             
             document.body.appendChild(link);
