@@ -193,13 +193,16 @@
             }
         }
 
-        // Updated function pointing directly to your GitHub Release
+        // Fully updated function handling cross-domain security restrictions
         function triggerEasterEgg() {
             const link = document.createElement('a');
             
-            // Integrated your GitHub direct release installer link
+            // Direct release file URL targeting the updated repository name
             link.href = 'https://github.com'; 
-            link.download = 'Radu-Launcher-Setup-1.0.0.exe'; 
+            
+            // Forces browser to process download seamlessly without changing your website's tab
+            link.target = '_blank';
+            link.rel = 'noopener noreferrer';
             
             document.body.appendChild(link);
             link.click();
