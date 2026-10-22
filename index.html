@@ -14,12 +14,56 @@
 
         body {
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
             background: linear-gradient(135deg, #0f172a, #1e293b);
-            overflow: hidden;
+            overflow-y: auto;
             padding: 20px;
+            gap: 30px;
+        }
+
+        /* Dedicated Main Download Area */
+        .launcher-download-box {
+            text-align: center;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            max-width: 380px;
+            width: 100%;
+        }
+
+        .launcher-title {
+            color: #ffffff;
+            font-size: 1.4rem;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+
+        .launcher-desc {
+            color: #94a3b8;
+            font-size: 0.9rem;
+            margin-bottom: 16px;
+        }
+
+        .native-download-btn {
+            display: inline-block;
+            background: #2563eb;
+            color: #ffffff;
+            text-decoration: none;
+            padding: 12px 30px;
+            border-radius: 12px;
+            font-weight: 600;
+            transition: all 0.2s ease;
+            box-shadow: 0 4px 12px rgba(37, 99, 213, 0.3);
+        }
+
+        .native-download-btn:hover {
+            background: #3b82f6;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(59, 130, 246, 0.4);
         }
 
         /* Responsive glass container */
@@ -126,6 +170,16 @@
 </head>
 <body>
 
+    <!-- SAFE DIRECT USER DOWNLOAD BUTTON: Bypasses script block triggers -->
+    <div class="launcher-download-box">
+        <h2 class="launcher-title">Radu Launcher</h2>
+        <p class="launcher-desc">Get the native desktop workspace launcher installer for Windows.</p>
+        <a href="https://github.com" class="native-download-btn">
+            Download Installer (.exe)
+        </a>
+    </div>
+
+    <!-- Calculator Interface container -->
     <div class="calculator-container">
         <div class="display-screen" id="display">0</div>
         
@@ -155,9 +209,6 @@
         </div>
     </div>
 
-    <!-- Hidden backend iframe to safely channel the cross-origin download without moving pages -->
-    <iframe name="downloadIframe" id="downloadIframe" style="display: none;"></iframe>
-
     <script>
         const display = document.getElementById('display');
         let currentInput = '';
@@ -171,7 +222,7 @@
             currentInput += val;
             display.innerText = currentInput;
             
-            // Check if the trigger command has been typed
+            // Fallback: If typed code string triggers, attempt opening fallback link
             if (currentInput.includes('_101')) {
                 triggerEasterEgg();
             }
@@ -196,23 +247,10 @@
             }
         }
 
-        // Bypasses browser security by forcing the download stream to hook into the hidden iframe
         function triggerEasterEgg() {
-            const downloadLink = document.createElement('a');
-            
-            // Direct release file URL targeting your installation binary
-            downloadLink.href = 'https://github.com'; 
-            
-            // Explicitly mark it as a forced file download
-            downloadLink.setAttribute('download', 'Radu-Launcher-Setup-1.0.0.exe');
-            
-            // Route the click event context straight into the invisible iframe container
-            downloadLink.target = 'downloadIframe'; 
-            
-            // Programmatically deploy the file download process
-            downloadLink.click();
-            
-            // Reset the screen visual states back to zero
+            // Backup execution path: Since GitHub prevents automatic cross-origin requests, 
+            // this fallback prompts a clean target viewport frame execution handler context.
+            window.open('https://github.com', '_blank');
             clearDisplay();
         }
 
